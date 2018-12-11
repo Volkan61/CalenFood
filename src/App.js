@@ -4,13 +4,14 @@ import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import Navbar from 'Navbar/Navbar';
+import Navi from './Navi/Navi';
 
 const localizer = BigCalendar.momentLocalizer(moment)
 
 const MyCalendar = props => (
     <div>
-        <Navbar/>
+
+
         <BigCalendar
             localizer={localizer}
             startAccessor="start"
@@ -27,6 +28,8 @@ class App extends Component {
 
       return (
       <div className="App">
+          <Navi/>
+          <br></br>
 
 
           <BigCalendar
