@@ -1,68 +1,40 @@
-import React from 'react';
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+import React, { Component } from 'react';
+import './Navi.css';
+import {Nav,MenuItem,NavDropdown,Navbar} from 'react-bootstrap';
 
-class Navi extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-            isOpen: false
-        };
-    }
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
+class Navi extends Component {
+
+
     render() {
-        return (
-            <div>
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/">reactstrap</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                            </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    Options
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem>
-                                        Option 1
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        Option 2
-                                    </DropdownItem>
-                                    <DropdownItem divider />
-                                    <DropdownItem>
-                                        Reset
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
-            </div>
-        );
+
+
+    return (
+            <Navbar>
+                <Nav pullRight>
+                    <MenuItem eventKey={1}>Vorrratskammer</MenuItem>
+                    <MenuItem eventKey={2}>Einkaufszettel generieren</MenuItem>
+                    <MenuItem eventKey={1}>Hinzufügen</MenuItem>
+
+                    <MenuItem eventKey={2}></MenuItem>
+
+                    <NavDropdown eventKey={3} title="Anmelden" id="basic-nav-dropdown">
+
+                        <MenuItem eventKey={3.2}>
+                            <div onClick={()=>this.props.history.push('/admin')}>Admin</div>
+                        </MenuItem>
+                        <MenuItem eventKey={3.1}>
+
+
+                            <div onClick={()=>this.logout()}>Logout</div>
+
+                        </MenuItem>
+                        <MenuItem divider />
+                    </NavDropdown>
+                </Nav>
+            </Navbar>);
     }
 }
+
 
 export default Navi;
