@@ -5,7 +5,9 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import events from 'events';
 import Navi from './Navi/Navi';
-
+import Unit from './Unit/Unit'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Calender from "./Calender/Calender";
 
 const event = [
     {
@@ -15,9 +17,6 @@ const event = [
         end: new Date(new Date().setHours(new Date().getHours() + 3)),
     }
 ];
-
-
-
 
 const localizer = BigCalendar.momentLocalizer(moment)
 
@@ -36,61 +35,41 @@ const MyCalendar = props => (
 class App extends Component {
 
 
-    state = {
-        events: event
-    };
-
     constructor(props) {
         super(props);
-
-        this.changeEvents = this.changeEvents.bind(this);
     }
-
-
-
-
-    changeEvents() {
-
-        console.log("TETEWR");
-
-        var newArr = this.state.events;
-        newArr.push(
-            {
-                id: 15,
-                title: 'Test',
-                start: new Date(new Date().setHours(new Date().getHours() -5)),
-                end: new Date(new Date().setHours(new Date().getHours() -4)),
-            }
-        );
-
-        this.setState({events:newArr})
-    }
-
 
 
   render() {
-      var myEventsList = []
-
       return (
       <div className="App">
-
           <Navi></Navi>
 
-          <div className={"calenderContent"}>
-              <BigCalendar
-                  localizer={localizer}
-                  events={this.state.events}
-                  startAccessor="start"
-                  endAccessor="end"
-              />
-          </div>
 
+          <Router>
+              <div>
+                  <ul>
+                      <li>
+                          <Link to="/">Home</Link>
+                      </li>
+                      <li>
+                          <Link to="/unit">Unit</Link>
+                      </li>
+                      <li>
+                          <Link to="/calender">Calender</Link>
+                      </li>
+                  </ul>
+                  <hr />
+
+                  <Route exact path="/" component={Calender} />
+                  <Route path="/unit" component={Unit} />
+                  <Route path="/calender" component={Calender} />
+
+              </div>
+          </Router>
       </div>
     );
   }
 }
 
 export default App;
-
-//   <div className={"divTest"} onClick={this.changeEvents}></div>
-//   <br></br>
